@@ -1,0 +1,41 @@
+.invalid-feedback {
+  display: block !important;
+}
+
+input.ng-invalid.ng-dirty,
+input.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.74);
+}
+
+.loader {
+  width: 150px;
+  height: 150px;
+  border: 10px solid white;
+  border-top: 10px solid #1657b0;
+  border-radius: 50%;
+  animation: load 2s linear infinite;
+}
+
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

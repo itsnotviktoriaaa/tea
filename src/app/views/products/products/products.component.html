@@ -1,0 +1,32 @@
+<section class="mb-5">
+  <div class="container container-md">
+    <div class="text-center mb-5">
+      <p class="fs-3 fw-semibold">Наши чайные коллекции</p>
+    </div>
+    <div class="products">
+      <div class="row gy-5">
+        <div class="col-lg-4 col-md-6" *ngFor="let product of products; let i = index;">
+          <div class="product border border-1 border-secondary border-opacity-25 rounded-1 mx-auto wow animate__pulse">
+            <div class="product-image">
+              <img src="{{product.image}}" class="w-100" alt="product {{i+1}}">
+            </div>
+            <div class="product-wrapper p-3">
+              <div class="product-title fw-semibold mb-3">{{product.title}}</div>
+              <div class="product-description mb-3">
+                {{product.description | shortProductDescription}}
+              </div>
+              <div class="product-button">
+                <button class="btn btn-primary w-50 hvr-grow-shadow" [routerLink]="['/product', product.id]">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isExistPartOfWord" class="text-center">Ничего не найдено</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="loader" class="loader-wrapper">
+  <div class="loader"></div>
+</div>

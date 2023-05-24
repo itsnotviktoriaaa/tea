@@ -1,0 +1,62 @@
+<main class="pt-5 pb-5 wow animate__backInDown">
+  <div class="container">
+    <div class="slider">
+      <div class="single-item w-100">
+        <div>
+          <img class="forSlider" src="assets/images/bannerFirst.png" alt="banner">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="mb-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="fs-3 fw-semibold">Ответы на часто задаваемые вопросы</p>
+    </div>
+    <div id="accordion" class="wow animate__bounceInLeft">
+      <h3 class="p-3 mb-3 rounded-2">Собираете ли вы подарочные боксы?</h3>
+      <div class="p-2 ps-3">
+        <p>
+          Да, у нас есть такая услуга. Мы можем собрать подарочный бокс на любой вкус, объем и стоимость!
+        </p>
+      </div>
+      <h3 class="p-3 mb-3 rounded-2">Сколько у вас разновидностей чая?</h3>
+      <div class="p-2 ps-3">
+        <p>
+          Ответ 2
+        </p>
+      </div>
+      <h3 class="p-3 mb-3 rounded-2">В какой срок осуществляется доставка?</h3>
+      <div class="p-2 ps-3">
+        <p>
+          Ответ 3
+        </p>
+      </div>
+      <h3 class="p-3 mb-3 rounded-2">У вас обновляется ассортимент?</h3>
+      <div class="p-2 ps-3">
+        <p>
+          Ответ 4
+        </p>
+      </div>
+      <h3 class="p-3 mb-3 rounded-2">Какого объема у вас пачки чая?</h3>
+      <div class="p-2 ps-3">
+        <p>
+          Ответ 5
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="popup-wrapper" *ngIf="isPopup">
+  <div class="popup">
+    <div class="container fw-bold text-center">
+      Посмотрите наши чайные коллекции
+      <button type="button" id="buttonSubmit" [routerLink]="'/products'" class="btn btn-primary w-100 hvr-grow-shadow mt-4">
+        Смотреть
+      </button>
+    </div>
+  </div>
+</div>
