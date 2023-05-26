@@ -1,33 +1,35 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {SearchButtonService} from "../../services/search-button.service";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ProductsService} from "../../services/products.service";
 
 @Component({
   selector: 'header-component',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  @ViewChild('inputElement')
-  private inputElement!: ElementRef;
+  input = '';
 
-  constructor(private searchButtonService: SearchButtonService,
-              private router: Router) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private productsService: ProductsService
+  ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.input = params['search']?.trim();
+      this.productsService.searchText.next(params['search']?.trim());
+    });
   }
 
   clickOnSearchButton() {
-    this.searchButtonService.getSearchFromInput(this.inputElement.nativeElement.value);
-    console.log(this.inputElement.nativeElement.value);
-    this.router.navigate(['/products'], {queryParams: {search: this.inputElement.nativeElement.value}})
+    this.router.navigate(['/products'], {queryParams: this.input? {search: this.input} : {}});
   }
 
   resetSearchInService() {
-    this.searchButtonService.getSearch = '';
-    this.inputElement.nativeElement.value = '';
-
-    //тут если сбрасываю параметры не обновляется само собой, пока только такой способ придумала, но он обновляет, что наверное не совсем правильно
     this.router.navigate(['/products']);
-    window.location.reload();
+    this.input = '';
   }
 }

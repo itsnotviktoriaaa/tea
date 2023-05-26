@@ -8,17 +8,17 @@
         <div class="col-lg-6 col-md-6">
           <div class="product border border-1 border-secondary border-opacity-25 rounded-1 mx-auto wow animate__pulse">
             <div class="product-image">
-              <img src="{{product.image}}" class="w-100" alt="{{product.id}}">
+              <img src="{{product?.image}}" class="w-100" alt="{{product?.id}}">
             </div>
             <div class="product-wrapper p-3">
-              <div class="product-title fw-semibold mb-3">{{product.title}}</div>
+              <div class="product-title fw-semibold mb-3">{{product?.title}}</div>
               <div class="product-description mb-3">
-                {{product.description}}
+                {{product?.description}}
               </div>
-              <div class="product-price mb-3 fw-bold">{{product.price}}$</div>
+              <div class="product-price mb-3 fw-bold">{{product?.price}}$</div>
               <div class="product-button">
                 <button class="btn btn-primary w-100 hvr-grow-shadow" [routerLink]="'/order'"
-                        [queryParams]="{product: product.title}">Купить
+                        [queryParams]="{product: product?.title}">Купить
                 </button>
               </div>
             </div>

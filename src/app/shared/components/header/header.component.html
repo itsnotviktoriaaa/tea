@@ -14,7 +14,7 @@
       </div>
       <form id="formForSearch" class="d-flex" role="search">
         <div class="reset me-2" (click)="resetSearchInService()">Сброс</div>
-        <input class="form-control me-2" type="search" placeholder="Поиск чая" #inputElement aria-label="Search">
+        <input class="form-control me-2" type="search" placeholder="Поиск чая" [(ngModel)]="input" [ngModelOptions]="{standalone: true}" aria-label="Search">
         <a class="btn btn-outline-primary hvr-grow-shadow" (click)="clickOnSearchButton()">Найти</a>
       </form>
     </div>

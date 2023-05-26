@@ -48,8 +48,8 @@ export class OrderComponent implements OnInit {
 
     this.infoForm!.get('name')!.valueChanges.subscribe((val) => {
       console.log(val);
-      if (/[\d]/.test(val!)) {
-        this.infoForm!.get('name')!.setValue('', {emitEvent: false});
+      if (val && /[\d]/.test(val)) {
+        this.infoForm!.get('name')!.setValue(val.replaceAll(/[\d]/g, ''));
       }
     });
 
@@ -58,16 +58,7 @@ export class OrderComponent implements OnInit {
   createOrder(button: HTMLButtonElement) {
     button.setAttribute('disabled', 'disabled');
     // console.log(button);
-    this.productsService.createOrder({
-      name: this.infoForm!.get('name')!.value!,
-      last_name: this.infoForm!.get('last_name')!.value!,
-      phone: this.infoForm!.get('phone')!.value!,
-      country: this.infoForm!.get('country')!.value!,
-      zip: this.infoForm!.get('zip')!.value!,
-      product: this.infoForm!.get('product')!.value!,
-      address: this.infoForm!.get('address')!.value!,
-      comment: this.infoForm!.get('comment')!.value!
-    })
+    this.productsService.createOrder(this.infoForm.getRawValue())
       .subscribe({
         next: (data) => {
           if (data.success && !data.message) {

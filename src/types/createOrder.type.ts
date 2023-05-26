@@ -1,12 +1,12 @@
 export type CreateOrderType = {
-  name: string,
-  last_name: string,
-  phone: string,
-  country: string,
-  zip: string,
-  product: string,
-  address: string,
-  comment: string
+  name: string | null,
+  last_name: string | null,
+  phone: string | null,
+  country: string | null,
+  zip: string | null,
+  product: string | null,
+  address: string | null,
+  comment: string | null
 }
 
 export type ResponseOrderType = {

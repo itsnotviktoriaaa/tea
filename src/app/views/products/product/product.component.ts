@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {map, pipe, Subscription, switchMap, tap} from "rxjs";
 import {ProductType} from "../../../../types/product.type";
 import {ProductsService} from "../../../shared/services/products.service";
 
@@ -12,9 +12,10 @@ import {ProductsService} from "../../../shared/services/products.service";
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
-  product!: ProductType;
+  product: ProductType | null = null;
+  // или product: ProductType = {} as ProductType;
+
   sub: Subscription = new Subscription();
-  sub1: Subscription = new Subscription();
   loader = false;
 
   constructor(private http: HttpClient,
@@ -25,32 +26,37 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loader = true;
-    this.sub = this.activatedRoute.params.subscribe((params) => {
-      if (params['id']) {
 
-        this.sub1 = this.productsService.getProduct(params['id'])
-          .subscribe(
-            {
-              next: (data) => {
-                if (data) {
-                  this.product = data;
-                  this.loader = false;
-                  console.log(this.product);
-                }
-              },
-              error: (error) => {
-                this.router.navigate(['/']);
-              }
+    this.sub = this.activatedRoute.params.pipe(
+      switchMap((params) => {
+        let param = params['id'];
+
+        if (param) {
+          return this.productsService.getProduct(param);
+        } else {
+          return this.productsService.getProduct(param);
+        }
+      })
+    )
+      .subscribe(
+        {
+          next: (data) => {
+            this.loader = false;
+            if (data) {
+              this.product = data;
+              console.log(this.product);
             }
-          )
-      }
-    })
-
+          },
+          error: () => {
+            this.loader = false;
+            this.router.navigate(['/']);
+          }
+        }
+      )
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-    this.sub1.unsubscribe();
   }
 
 }
